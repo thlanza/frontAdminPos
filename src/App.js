@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import { useSelector } from 'react-redux';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Nav from './components/Navigation/Nav';
+import Home from './pages/Home/Home';
+import Login from './pages/Login/Login';
+import PrimeiroLogin from './pages/PrimeiroLogin/PrimeiroLogin';
+import Registrar from './pages/Registrar.jsx/Registrar';
+import PrimeiroLoginRotasProtegidas from './pages/RotasProtegidas/PrimeiroLoginRotaProtegida';
+import UltimoLoginRotasProtegidas from './pages/RotasProtegidas/UltimoLoginRotasProtegidas';
 
 function App() {
+  const admin = useSelector(state => state?.admin);
+  const { primeiroLogin, usuarioLogado } = admin;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={usuarioLogado ? <Navigate to="/home" /> : <Login />} />
+        <Route path="/primeiroLogin" element={<PrimeiroLogin />} />
+        <Route element={<PrimeiroLoginRotasProtegidas user={primeiroLogin} />} >
+         <Route path="/registrar" element={<Registrar />} />
+        </Route> 
+        <Route element={<UltimoLoginRotasProtegidas usuarioLogado={usuarioLogado} />} >
+            <Route path="/home" element={<Home />} />
+        </Route>
+
+      </Routes>
+    </Router>
   );
 }
 
