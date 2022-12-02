@@ -3,10 +3,10 @@ import { Gym } from 'iconoir-react';
 
 const Logo = ({ small, mobile }) => {
   return (
-    <div className={small ? 'flex items-center border-b-2 border-r-2 border-black bg-white' : 'flex items-center text-4xl border-b-2 border-black'}>
+    <div className={small ? 'flex items-center bg-white' : 'flex items-center text-4xl border-b-2 border-black'}>
     <div className='relative'>
-      <div className='bg-black w-20 h-20' />
-      <Gym fontSize={50} color='#B8D20B'className='absolute top-0'/>
+      <div className='bg-myblue w-20 h-20' />
+      <Gym fontSize={50} color='#FFF'className='absolute top-0'/>
     </div>
   {small ? (
     <div>

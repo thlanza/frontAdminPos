@@ -12,7 +12,7 @@ import { primeiroLoginAction } from '../../redux/slices/admin/adminSlices';
 import Logo from '../../components/Logo/Logo';
 
 const formSchema = Yup.object({
-    email: Yup.string().required("Email é requerido."),
+    email: Yup.string().email("Deve ser um email válido.").required("Email é requerido."),
     senha: Yup.string().required("Senha é requerida."),
 });
 
@@ -69,6 +69,7 @@ const PrimeiroLogin = () => {
             <p className='font-bakbak text-left font-bold flex justify-between'><span>Senha</span>
                 <span className='font-spartan text-red-500'>{formik?.touched?.senha && formik?.errors?.senha}</span>
             </p>
+            <ToastContainer />
              <input 
                  type="password"  
                  value={formik.values.senha}

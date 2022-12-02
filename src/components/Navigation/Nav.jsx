@@ -8,12 +8,13 @@ import { ImStatsDots } from "react-icons/im";
 import { MdOutlineAttachMoney } from "react-icons/md"
 import { logoutAction } from '../../redux/slices/admin/adminSlices';
 import useMediaQuery from '../../hooks/useMediaQuery';
+import { Link } from 'react-router-dom';
 
 const IconLink = ({ icon, link, url }) => {
     return (
         <div className='flex mt-3 items-center'>
             {icon}
-            <a href={url} className='ml-3 text-white font-bakbak'>{link}</a>
+            <Link to={url} className='ml-3 text-white font-bakbak'>{link}</Link>
         </div>
     )
 }

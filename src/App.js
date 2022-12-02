@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Nav from './components/Navigation/Nav';
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
+import Modalidades from './pages/Modalidades/Modalidades';
 import PrimeiroLogin from './pages/PrimeiroLogin/PrimeiroLogin';
 import Registrar from './pages/Registrar.jsx/Registrar';
 import PrimeiroLoginRotasProtegidas from './pages/RotasProtegidas/PrimeiroLoginRotaProtegida';
@@ -22,6 +23,7 @@ function App() {
         </Route> 
         <Route element={<UltimoLoginRotasProtegidas usuarioLogado={usuarioLogado} />} >
             <Route path="/home" element={<Home />} />
+            <Route path="/modalidades" element={<Modalidades />} />
         </Route>
 
       </Routes>

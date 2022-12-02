@@ -14,7 +14,7 @@ import { registrarUsuarioAction } from '../../redux/slices/admin/adminSlices';
 const formSchema = Yup.object({
     primeiroNome: Yup.string().required("Primeiro nome é requerido."),
     sobrenome: Yup.string().required("Sobrenome é requerido."),
-    email: Yup.string().required("Email é requerido."),
+    email: Yup.string().email("Deve ser um email válido.").required("Email é requerido."),
     senha: Yup.string().required("Senha é requerida."),
     image: Yup.string().required("Imagem é requerida.")
 });

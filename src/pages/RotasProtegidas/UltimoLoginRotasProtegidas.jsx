@@ -39,8 +39,8 @@ const UltimoLoginRotasProtegidas = ({ usuarioLogado }) => {
       </div>
     ) :(
       <div className='flex'>
-      <Nav />
-      <Outlet />
+        <div className='bg-myblack'><Nav /></div>
+        <Outlet />
     </div>
     )}  
     </>

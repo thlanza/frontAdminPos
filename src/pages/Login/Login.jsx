@@ -1,23 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import useMediaQuery from '../../hooks/useMediaQuery'
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
-import { MdOutlineAlternateEmail } from 'react-icons/md';
-import { RiLockPasswordLine } from 'react-icons/ri'
-import { Gym } from 'iconoir-react';
 import Logo from '../../components/Logo/Logo';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginAction } from '../../redux/slices/admin/adminSlices';
+import { ToastContainer, toast } from 'react-toastify';
 
 const formSchema = Yup.object({
-  email: Yup.string().required("Email é requerido."),
+  email: Yup.string().email("Deve ser um email válido.").required("Email é requerido."),
   senha: Yup.string().required("Senha é requerida."),
 });
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const notify = (msg) => toast.error(msg);
 
   const formik = useFormik({
     initialValues: {
@@ -33,8 +32,14 @@ const Login = () => {
   const store = useSelector((state) => state?.admin);
   const { usuarioLogado, loading, appErr, serverErr } = store;
 
+  useEffect(() => {
+    if(appErr || serverErr) {
+        notify(`${appErr} ${serverErr}`)
+        }
+    }, [appErr, serverErr]);
+
   if (usuarioLogado) {
-    console.log("logado");
+    navigate("/home")
   }
 
   const renderButton = () => {
@@ -75,7 +80,7 @@ const Login = () => {
                             value={formik.values.email}
                             onChange={formik.handleChange("email")}
                             onBlur={formik.handleBlur("email")}
-                            type="text" 
+                            type="email" 
                             className="relative border-4 p-3 w-full rounded-lg placeholder:p-4" 
                             placeholder='Coloque aqui seu email'
                         />
@@ -89,6 +94,7 @@ const Login = () => {
                         className="border-4 p-3 w-full rounded-lg placeholder:p-4" 
                         placeholder='Coloque aqui seu email'
                     />
+                <ToastContainer />
                 {renderButton(loading)}
                 <p className='mt-7 font-light'>É o seu primeiro acesso? <button 
                   onClick={() => navigate('/primeiroLogin')} 
@@ -109,7 +115,7 @@ const Login = () => {
               <p className='font-bakbak text-left font-bold flex justify-between'><span>Email</span> 
               <span className='font-spartan text-red-500'>{formik?.touched?.email && formik?.errors?.email}</span></p>
               <input 
-                  type="text" 
+                  type="email" 
                   value={formik.values.email}
                   onChange={formik.handleChange("email")}
                   onBlur={formik.handleBlur("email")}
@@ -119,6 +125,7 @@ const Login = () => {
               <p className='font-bakbak text-left font-bold flex justify-between'><span>Senha</span>
               <span className='font-spartan text-red-500'>{formik?.touched?.senha && formik?.errors?.senha}</span>
               </p>
+              <ToastContainer />
               <input 
                   type="password"
                   value={formik.values.senha}  
