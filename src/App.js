@@ -1,6 +1,8 @@
 import { useSelector } from 'react-redux';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Nav from './components/Navigation/Nav';
+import Modal from './components/Portal/Modal';
+import Agenda from './pages/Agenda/Agenda';
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
 import Modalidades from './pages/Modalidades/Modalidades';
@@ -8,6 +10,14 @@ import PrimeiroLogin from './pages/PrimeiroLogin/PrimeiroLogin';
 import Registrar from './pages/Registrar.jsx/Registrar';
 import PrimeiroLoginRotasProtegidas from './pages/RotasProtegidas/PrimeiroLoginRotaProtegida';
 import UltimoLoginRotasProtegidas from './pages/RotasProtegidas/UltimoLoginRotasProtegidas';
+import { loadCldr } from '@syncfusion/ej2-base';
+
+loadCldr(
+  require('cldr-data/supplemental/numberingSystems.json'),
+  require('cldr-data/main/pt/ca-gregorian.json'),
+  require('cldr-data/main/pt/numbers.json'),
+  require('cldr-data/main/pt/timeZoneNames.json')
+  );
 
 function App() {
   const admin = useSelector(state => state?.admin);
@@ -24,6 +34,9 @@ function App() {
         <Route element={<UltimoLoginRotasProtegidas usuarioLogado={usuarioLogado} />} >
             <Route path="/home" element={<Home />} />
             <Route path="/modalidades" element={<Modalidades />} />
+            <Route path="/modal/:id" element={<Modal />} />
+            <Route path="/novaModalidade" element={<Modal />} />
+            <Route path="/agenda" element={<Agenda />} />
         </Route>
 
       </Routes>

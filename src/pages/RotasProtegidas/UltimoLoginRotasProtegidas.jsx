@@ -13,15 +13,17 @@ const UltimoLoginRotasProtegidas = ({ usuarioLogado }) => {
       return <Navigate to="/primeiroLogin" />
     }
 
+  
     const setNav = () => {
       return navigationRef.current?.classList.toggle('inactive');
     }
   
 
+
     return (
      <>
     {isMobile ? (
-      <div className='relative transition-all duration-500'>
+      <div className='relative transition-all duration-500 w-[310px]'>
         <Outlet />
         <div className='absolute top-2 right-2'>
           <GiHamburgerMenu size={35} onClick={() => setNav()}/>
@@ -29,11 +31,11 @@ const UltimoLoginRotasProtegidas = ({ usuarioLogado }) => {
         </div>
         <div 
           ref={navigationRef}
-          className='absolute inset-0 transition-all duration-500 w-[100%]'>
+          className='absolute inset-0 transition-all duration-500 w-[310px]'>
             <div className='absolute top-2 right-2'>
               <AiOutlineClose size={35} onClick={() => setNav()}/>
             </div>
-          <Nav />
+          <Nav aoClicar={() => setNav()} />
         </div>
 
       </div>
