@@ -11,6 +11,7 @@ import Registrar from './pages/Registrar.jsx/Registrar';
 import PrimeiroLoginRotasProtegidas from './pages/RotasProtegidas/PrimeiroLoginRotaProtegida';
 import UltimoLoginRotasProtegidas from './pages/RotasProtegidas/UltimoLoginRotasProtegidas';
 import { loadCldr } from '@syncfusion/ej2-base';
+import Alunos from './pages/Alunos/Alunos';
 
 loadCldr(
   require('cldr-data/supplemental/numberingSystems.json'),
@@ -37,6 +38,7 @@ function App() {
             <Route path="/modal/:id" element={<Modal />} />
             <Route path="/novaModalidade" element={<Modal />} />
             <Route path="/agenda" element={<Agenda />} />
+            <Route path="/alunos" element={<Alunos />} />
         </Route>
 
       </Routes>

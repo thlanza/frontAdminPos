@@ -7,4 +7,34 @@
         width: 0px !important;
         opacity: 75%;
     }
+
+    
+.pagination {
+    display: flex;
+    justify-content: start;
+    list-style: none;
+    cursor: pointer;
+    padding: 20px;
+  }
+  
+  .pagination a {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #315199;
+    color: #315199;
+  }
+  
+  .pagination__link {
+    font-weight: bold;
+  }
+  
+  .pagination__link--active a {
+    color: #fff;
+    background: #315199;
+  }
+  
+  .pagination__link--disabled a {
+    color: rgb(198, 197, 202);
+    border: 1px solid rgb(198, 197, 202);
+  }
 }

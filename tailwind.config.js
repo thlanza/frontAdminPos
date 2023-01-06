@@ -14,7 +14,9 @@ module.exports = {
         myblue: "#315199",
         myblack: "#2F2E33",
         mygray: "#D5D6D2",
-        mygray2: "#BCBABE"
+        mygray2: "#BCBABE",
+        mypurple: "#6c7ac9",
+        myred: "#FF4447"
       },
       screens: {
         xs: "480px",
