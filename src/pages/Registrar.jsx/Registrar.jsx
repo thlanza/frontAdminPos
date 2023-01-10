@@ -10,6 +10,8 @@ import * as Yup from 'yup';
 import useMediaQuery from '../../hooks/useMediaQuery';
 import styled from 'styled-components';
 import { registrarUsuarioAction } from '../../redux/slices/admin/adminSlices';
+import { Link } from 'react-router-dom';
+import { deletarAlunoAction } from '../../redux/slices/alunos/alunosSlices';
 
 const formSchema = Yup.object({
     primeiroNome: Yup.string().required("Primeiro nome é requerido."),
@@ -59,6 +61,7 @@ const Registrar = () => {
 
   const isMobile = useMediaQuery("(max-width: 768px)");
 
+
   return (
     <div className='flex flex-col sm:flex-row relative'>
     {isMobile ? 
@@ -66,7 +69,7 @@ const Registrar = () => {
        <>
     <Logo />
     <p className='text-center mt-8 mb-8 text-5xl font-spartan'>Preencha seus dados para registrar-se.</p>
-   
+   {appErr || serverErr ? <h1 className='text-red-500'>{appErr} {serverErr}</h1> : null}
         <form onSubmit={formik.handleSubmit} className='pt-1 p-5'>
             <p className='font-bakbak text-left font-bold flex justify-between'><span>Primeiro Nome</span> 
                 <span className='font-spartan text-red-500'>{formik?.touched?.primeiroNome && formik?.errors?.primeiroNome}</span>
@@ -126,6 +129,11 @@ const Registrar = () => {
                 type="submit"
                 className='bg-myblue text-white rounded-lg p-3 w-full mt-12 hover:bg-blue-700'>
                  Logar
+            </button>
+            <button 
+                type="submit"
+                className='bg-myblue text-white rounded-lg p-3 w-full mt-12 hover:bg-blue-700'>
+                 <Link to="/">Ir para página de Login</Link>
             </button>
         </form>
  </>
@@ -191,9 +199,13 @@ const Registrar = () => {
             />
             </Container>
             <button 
-                type='submit' 
+                type="submit"
                 className='bg-myblue text-white rounded-lg p-3 w-full mt-12 hover:bg-blue-700'>
-                Logar
+                Registrar
+            </button>
+            <button 
+                className='bg-myblue text-white rounded-lg p-3 w-full mt-12 hover:bg-blue-700'>
+                 <Link to="/">Ir para página de Login</Link>
             </button>
     </form>
     </div>
