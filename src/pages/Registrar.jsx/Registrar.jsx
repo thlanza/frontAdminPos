@@ -125,11 +125,6 @@ const Registrar = () => {
               }}
             />
             </Container>
-            <button 
-                type="submit"
-                className='bg-myblue text-white rounded-lg p-3 w-full mt-12 hover:bg-blue-700'>
-                 Cadastrar
-            </button>
             {loading ? 
             (
                 <button 
