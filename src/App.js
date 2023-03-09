@@ -27,7 +27,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={usuarioLogado ? <Navigate to="/home" /> : <Login />} />
+        <Route exact path="/" element={usuarioLogado ? <Navigate to="/home" /> : <Login />} />
         <Route path="/primeiroLogin" element={<PrimeiroLogin />} />
         <Route element={<PrimeiroLoginRotasProtegidas user={primeiroLogin} />} >
          <Route path="/registrar" element={<Registrar />} />

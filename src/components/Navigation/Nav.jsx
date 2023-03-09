@@ -8,23 +8,31 @@ import { ImStatsDots } from "react-icons/im";
 import { MdOutlineAttachMoney } from "react-icons/md"
 import { logoutAction } from '../../redux/slices/admin/adminSlices';
 import useMediaQuery from '../../hooks/useMediaQuery';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const IconLink = ({ icon, link, url, onClick }) => {
+    let styles = link.toLowerCase();
     return (
         <div className='flex mt-3 items-center'>
             {icon}
-            <Link onClick={onClick} to={url} className='ml-3 text-white font-bakbak'>{link}</Link>
+            <Link onClick={onClick} to={url} className={`ml-3 text-white font-bakbak ${styles}`}>{link}</Link>
         </div>
     )
 }
 
+
 const Nav = ({ aoClicar }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const admin = useSelector(state => state?.admin);
   const { usuarioLogado } = admin;
   const fotoDePerfil = usuarioLogado?.usuario?.fotoDePerfil;
   const isMobile = useMediaQuery("(max-width: 768px)");
+  const onLogout = () => {
+    dispatch(logoutAction());
+    navigate("/");
+    window.location.reload();
+  };
   return (
     <div className={isMobile ? 'h-screen overflow-hidden bg-myblack flex flex-col w-[100%]' : 'h-screen bg-myblack w-[350px] flex flex-col'}>
         <Logo small={true}/>
@@ -45,7 +53,7 @@ const Nav = ({ aoClicar }) => {
         </div>
         <div 
             className='text-white mt-16 flex cursor-pointer flex-col items-center font-spartan'
-            onClick={() => dispatch(logoutAction())}
+            onClick={onLogout}
         >
             <AiOutlineLogout color="white" size={40} />
             <p>Deslogar</p>

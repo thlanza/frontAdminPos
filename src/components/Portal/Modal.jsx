@@ -132,10 +132,10 @@ const Modal = () => {
       <p className='font-bakbak text-myblue mt-3 text-4xl pt-16'>{newModal ? 'Nova Modalidade' : 'Editar Modalidade'}</p>
     </div>
     <div className='grid grid-cols-3 mt-2'>
-          <div className='pl-5 bg-myblack text-white border'>Nome</div>
+          <div className='pl-5 bg-myblack text-white border'>Nome da Modalidade</div>
           <input
             type="text"
-            className="col-span-2 border border-gray-700 p-3 rounded mb-1 ml-5 w-[85%] flex justify-center items-center"
+            className="nome-modalidade col-span-2 border border-gray-700 p-3 rounded mb-1 ml-5 w-[85%] flex justify-center items-center"
             value={formik.values.nomeModalidade}
             onChange={formik.handleChange("nomeModalidade")}
             onBlur={formik.handleBlur("nomeModalidade")}
@@ -153,7 +153,7 @@ const Modal = () => {
               value={formik.values.horario}
               onChange={formik.handleChange("horario")}
               onBlur={formik.handleBlur("horario")}
-              className="col-span-2 border border-gray-700 p-3 rounded ml-5 mb-1 w-[85%]"
+              className="horario col-span-2 border border-gray-700 p-3 rounded ml-5 mb-1 w-[85%]"
               placeholder="Horário"
             />
       </div>
@@ -189,13 +189,13 @@ const Modal = () => {
       <div className='flex justify-center'>
       <p className='font-bakbak text-myblue mt-3 text-4xl'>{newModal ? 'Nova Modalidade' : 'Editar Modalidade'}</p>
     </div>
-    <form onSubmit={formik.handleSubmit} className='flex flex-col items-center'>
-    <div className='bg-mygray mt-8 w-[1070px] grid grid-cols-3 font-spartan'>
+    <form onSubmit={formik.handleSubmit} className='flex flex-col items-center w-[15%] ml-[350px]'>
+    <div className='bg-mygray mt-8 w-[800px] flex flex-col font-spartan'>
     <div>
     <p className='flex justify-center text-2xl mb-1 bg-myblack text-white'>Nome da Modalidade</p>
     <input
     type="text"
-    className="border border-gray-700 p-3 rounded mb-1 ml-5 w-[85%] flex justify-center items-center"
+    className="nome-modalidade border border-gray-700 p-3 rounded mb-1 ml-5 w-[85%] flex justify-center items-center"
     value={formik.values.nomeModalidade}
     onChange={formik.handleChange("nomeModalidade")}
     onBlur={formik.handleBlur("nomeModalidade")}
@@ -213,7 +213,7 @@ const Modal = () => {
     value={formik.values.horario}
     onChange={formik.handleChange("horario")}
     onBlur={formik.handleBlur("horario")}
-    className="border border-gray-700 p-3 rounded ml-5 mb-1 w-[85%]"
+    className="horario border border-gray-700 p-3 rounded ml-5 mb-1 w-[85%]"
     placeholder="Horário"
     />
     </div>
@@ -223,7 +223,7 @@ const Modal = () => {
     <>
    <p className='flex justify-center text-2xl bg-myblack text-white'>Dias</p>    
    <Select 
-   className='p-3 mb-1'
+   className='p-3 mb-1 select'
    components={animatedComponents}
    onChange={(e) => {
      formik.setFieldValue("dias", e)
@@ -240,7 +240,7 @@ const Modal = () => {
 
     </div>
 
-      <div className='bg-mygray w-[1070px] flex items-center justify-center pb-3'>
+      <div className='bg-mygray w-[800px] flex items-center justify-center pb-3'>
           <button 
           type="submit"
           className='pt-2 pb-2 pl-3 pr-3 bg-myblue text-white rounded-lg 

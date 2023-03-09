@@ -4,7 +4,7 @@ import { ImArrowRight } from "react-icons/im";
 const Home = () => {
   return (
     <div className='border w-screen bg-mygray2'>
-      <div className='flex justify-center items-center w-[calc(100%)-0.75rem] bg-mygray m-[0.75rem]'>
+      <div className='bem-vindo flex justify-center items-center w-[calc(100%)-0.75rem] bg-mygray m-[0.75rem]'>
       <h1 className='p-3 font-bakbak text-4xl text-myblue'>BEM-VINDO(A) À ACADEMIA LANZA!</h1>
       </div>
       <div className='flex justify-start items-center w-[calc(100%)-0.75rem] bg-mygray m-[0.75rem]'>

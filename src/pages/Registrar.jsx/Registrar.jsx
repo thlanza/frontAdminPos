@@ -69,7 +69,7 @@ const Registrar = () => {
        <>
     <Logo />
     <p className='text-center mt-8 mb-8 text-5xl font-spartan'>Preencha seus dados para registrar-se.</p>
-   {appErr || serverErr ? <h1 className='text-red-500'>{appErr} {serverErr}</h1> : null}
+   {appErr || serverErr ? <h1 className='text-red-500 erroRegistrar'>{appErr} {serverErr}</h1> : null}
         <form onSubmit={formik.handleSubmit} className='pt-1 p-5'>
             <p className='font-bakbak text-left font-bold flex justify-between'><span>Primeiro Nome</span> 
                 <span className='font-spartan text-red-500'>{formik?.touched?.primeiroNome && formik?.errors?.primeiroNome}</span>
@@ -143,6 +143,7 @@ const Registrar = () => {
     <div className='w-1/2'>
         <Logo />
         <p className='font-spartan p-5 text-center text-5xl mt-5'>Preencha seus dados para registrar-se.</p>
+        {appErr || serverErr ? <h1 className='text-red-500 erroRegistrar'>{appErr} {serverErr}</h1> : null}
         <form onSubmit={formik.handleSubmit} className='p-5 mt-1'>
         <p className='font-bakbak text-left font-bold flex justify-between'><span>Primeiro Nome</span> 
             <span className='font-spartan text-red-500'>{formik?.touched?.primeiroNome && formik?.errors?.primeiroNome}</span>

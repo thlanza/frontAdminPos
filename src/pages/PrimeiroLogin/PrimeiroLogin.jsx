@@ -59,7 +59,7 @@ const PrimeiroLogin = () => {
                 <span className='font-spartan text-red-500'>{formik?.touched?.email && formik?.errors?.email}</span>
              </p>
              <input 
-                     type="text" 
+                     type="email" 
                      value={formik.values.email}
                      onChange={formik.handleChange("email")}
                      onBlur={formik.handleBlur("email")}
@@ -108,7 +108,7 @@ const PrimeiroLogin = () => {
                 value={formik.values.email}
                 onChange={formik.handleChange("email")}
                 onBlur={formik.handleBlur("email")}
-                type="text" 
+                type="email" 
                 className="border p-3 w-full rounded-lg" 
                 placeholder='Coloque aqui seu email'
             />
