@@ -68,7 +68,7 @@ const Registrar = () => {
     (
        <>
     <Logo />
-    <p className='text-center mt-8 mb-8 text-5xl font-spartan'>Preencha seus dados para registrar-se.</p>
+    <p className='text-center mt-8 mb-8 text-5xl font-spartan p-1'>Preencha seus dados para registrar-se.</p>
    {appErr || serverErr ? <h1 className='text-red-500 erroRegistrar'>{appErr} {serverErr}</h1> : null}
         <form onSubmit={formik.handleSubmit} className='pt-1 p-5'>
             <p className='font-bakbak text-left font-bold flex justify-between'><span>Primeiro Nome</span> 
@@ -128,8 +128,23 @@ const Registrar = () => {
             <button 
                 type="submit"
                 className='bg-myblue text-white rounded-lg p-3 w-full mt-12 hover:bg-blue-700'>
-                 Logar
+                 Cadastrar
             </button>
+            {loading ? 
+            (
+                <button 
+                disabled
+                className='bg-gray-500 text-white rounded-lg p-3 w-full mt-12'>
+                Carregando...
+            </button>
+             ) 
+             : (
+                    <button 
+                    type="submit"
+                    className='bg-myblue text-white rounded-lg p-3 w-full mt-12 hover:bg-blue-700'>
+                     Cadastrar
+                </button>
+            )}
             <button 
                 type="submit"
                 className='bg-myblue text-white rounded-lg p-3 w-full mt-12 hover:bg-blue-700'>
