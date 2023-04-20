@@ -12,6 +12,7 @@ import PrimeiroLoginRotasProtegidas from './pages/RotasProtegidas/PrimeiroLoginR
 import UltimoLoginRotasProtegidas from './pages/RotasProtegidas/UltimoLoginRotasProtegidas';
 import { loadCldr } from '@syncfusion/ej2-base';
 import Alunos from './pages/Alunos/Alunos';
+import Estatisticas from './pages/Estatisticas/Estatisticas';
 
 loadCldr(
   require('cldr-data/supplemental/numberingSystems.json'),
@@ -39,6 +40,7 @@ function App() {
             <Route path="/novaModalidade" element={<Modal />} />
             <Route path="/agenda" element={<Agenda />} />
             <Route path="/alunos" element={<Alunos />} />
+            <Route path="/estatisticas" element={<Estatisticas />} />
         </Route>
 
       </Routes>
