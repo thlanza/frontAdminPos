@@ -6,7 +6,8 @@ import useMediaQuery from '../../hooks/useMediaQuery';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import PieChart from '../../components/PieChart/PieChart';
-import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs'
+import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs';
+import { RxDotFilled } from 'react-icons/rx';
 
 
 
@@ -52,14 +53,35 @@ const Estatisticas = () => {
     const ultimoSlide = indiceCorrente === graficos.length - 1;
     const novoIndice = ultimoSlide ? 0 : indiceCorrente + 1;
     configurarIndiceCorrente(novoIndice);
+  };
+
+  const vaiParaSlide = (indiceDoSlide) => {
+    configurarIndiceCorrente(indiceDoSlide);
+  }
+
+  const ajustarTamanho = (indiceDoIcone) => {
+    console.log("indice corrente", indiceCorrente)
+    console.log("indice do ìcone", indiceDoIcone);
+    
+    try {
+    if (indiceDoIcone === indiceCorrente) {
+      return 30;
+    } else {
+      return 28;
+    }
+  } catch(err) {
+    console.log(err);
+  }
   }
 
   return (
     <div>
       {isMobile ? <div>TODO</div> : (
-        <div>
-        <p>Gráficos</p>
-        <div className='w-[1000px] h-[820px] m-auto py-16 px-4 relative group'>
+        <div className='bg-mygray2 w-[calc(100vw-370px)] border'>
+           <div className='flex justify-center items-center w-[calc(100%)-0.75rem] bg-mygray m-[0.75rem]'>
+            <h1 className='p-3 font-bakbak text-4xl text-myblue'>Estatísticas</h1>
+            </div>
+        <div className='w-[1000px] h-[820px] mt-0 mb-auto mr-auto ml-auto pt-1 pb-16 px-4 relative group'>
           {dadosAluno && dadosModalidade ? 
           <>
           <div className='w-full h-full rounded-2xl bg-center bg-cover duration-500 bg-slate-400 flex'>
@@ -70,6 +92,13 @@ const Estatisticas = () => {
         </div>
         <div className='hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
           <BsChevronCompactRight onClick={proximoSlide} size={30} />
+        </div>
+        <div className='flex top-4 justify-center py-2'>
+            {graficos.map((slide, indiceDoSlide) => (
+              <div key={indiceDoSlide} onClick={() => vaiParaSlide(indiceDoSlide)}className='text-2xl cursor-pointer'>
+                <RxDotFilled color={indiceCorrente === indiceDoSlide ? 'black' : 'gray'}/>
+              </div>
+            ))}
         </div>
         </> : null 
         }

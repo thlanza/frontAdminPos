@@ -1,5 +1,6 @@
 import * as d3 from "d3";
 import { useEffect, useRef } from "react";
+import { event as currentEvent  } from 'd3-selection';
 
 const Barchart = ({ data }) => {
   const ref = useRef();
@@ -40,7 +41,23 @@ const Barchart = ({ data }) => {
       const y = d3.scaleLinear().domain([0, maximoValor]).range([height, 0]);
       svg.append("g").call(d3.axisLeft(y));
 
+      var colors = d3.scaleQuantize()
+    .domain([0,maximoValor])
+    .range(["#E6F598", 
+    "#FFFFBF", "#FEE08B", "#FDAE61", "#F46D43", "#D53E4F", "#9E0142"]);
+
+    // let colors = d3.scaleLinear().domain(0, maximoValor).range(["white", "blue"])
+
       // Bars
+
+      let tooltip = d3.select("body")
+    .append("div")
+    .style("position", "absolute")
+    .style("z-index", "10")
+    .style("visibility", "hidden")
+    .style("background", "#ffffff")
+
+
       svg
         .selectAll("mybar")
         .data(data)
@@ -49,7 +66,12 @@ const Barchart = ({ data }) => {
         .attr("y", (d) => y(d.valor))
         .attr("width", x.bandwidth())
         .attr("height", (d) => height - y(d.valor))
-        .attr("fill", "#5f0f40");
+        .attr("fill", function(d) {
+          return colors(d.valor)
+        })
+        .on("mouseover", function(d, i){tooltip.text(`valor: ${i.valor}`); return tooltip.style("visibility", "visible");})
+        .on("mousemove", function(event){return tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
+        .on("mouseout", function(){return tooltip.style("visibility", "hidden");});
     
   }, []);
 
