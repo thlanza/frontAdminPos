@@ -84,10 +84,10 @@ const Estatisticas = () => {
           <div className='w-full h-full rounded-2xl bg-center bg-cover duration-500 bg-slate-400 flex'>
           {graficosMobile[indiceCorrente]}
         </div>
-        <div className='hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
+        <div className='absolute top-[69%] -translate-x-0 translate-y-[50%] left-1 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
           <BsChevronCompactLeft onClick={slideAnterior} size={30} />
         </div>
-        <div className='hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
+        <div className='absolute top-[69%] -translate-x-0 translate-y-[50%] right-1 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
           <BsChevronCompactRight onClick={proximoSlide} size={30} />
         </div>
         <div className='flex top-4 justify-center py-2'>
@@ -114,10 +114,10 @@ const Estatisticas = () => {
           <div className='w-full h-full rounded-2xl bg-center bg-cover duration-500 bg-slate-400 flex'>
           {graficos[indiceCorrente]}
         </div>
-        <div className='hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
+        <div className='absolute top-[50%] -translate-x-0 translate-y-[50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
           <BsChevronCompactLeft onClick={slideAnterior} size={30} />
         </div>
-        <div className='hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
+        <div className='absolute top-[50%] -translate-x-0 translate-y-[50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
           <BsChevronCompactRight onClick={proximoSlide} size={30} />
         </div>
         <div className='flex top-4 justify-center py-2'>
