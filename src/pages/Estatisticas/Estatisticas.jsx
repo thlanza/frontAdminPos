@@ -34,12 +34,23 @@ const Estatisticas = () => {
   <h1 className='mt-5 ml-5 text-white font-spartan'>Este gráfico mostra, mês a mês, o número de inscrições na academia.</h1>
   <BarChart data={dadosAluno} className='self-end'/>
   </div>;
+  const barChartMobile = 
+  <div>
+  <h1 className='w-[90vw] mt-5 ml-5 text-white font-spartan'>Este gráfico mostra, mês a mês, o número de inscrições na academia.</h1>
+  <BarChart data={dadosAluno} mobile={true} className='self-end'/>
+  </div>;
+  const pieChartMobile = 
+    <div>
+      <h1 className='w-[90vw] mt-5 ml-5 text-white font-spartan'>Este gráfico mostra a distribuição das modalidades, pelo total de alunos inscritos.</h1>
+      <PieChart data={dadosModalidade} outerRadius={110} innerRadius={0} mobile={true} className='self-end'/>
+    </div>;
   const pieChart =  
   <div>
   <h1 className='mt-5 ml-5 text-white font-spartan'>Este gráfico mostra a distribuição das modalidades, pelo total de alunos inscritos.</h1>
   <PieChart data={dadosModalidade} outerRadius={220} innerRadius={0} className='self-end'/>
   </div>;
   const graficos = [barChart, pieChart];
+  const graficosMobile = [barChartMobile, pieChartMobile]
     
   const [indiceCorrente, configurarIndiceCorrente] = useState(0);
 
@@ -59,24 +70,40 @@ const Estatisticas = () => {
     configurarIndiceCorrente(indiceDoSlide);
   }
 
-  const ajustarTamanho = (indiceDoIcone) => {
-    console.log("indice corrente", indiceCorrente)
-    console.log("indice do ìcone", indiceDoIcone);
-    
-    try {
-    if (indiceDoIcone === indiceCorrente) {
-      return 30;
-    } else {
-      return 28;
-    }
-  } catch(err) {
-    console.log(err);
-  }
-  }
 
   return (
     <div>
-      {isMobile ? <div>TODO</div> : (
+      {isMobile ?  (
+        <div className='bg-mygray2 w-[100vw] border'>
+           <div className='flex justify-center items-center w-[90vw] bg-mygray m-[0.75rem]'>
+            <h1 className='p-3 font-bakbak text-4xl text-myblue'>Estatísticas</h1>
+            </div>
+        <div className='w-[380px] h-[600px] mt-0 mb-auto mr-auto ml-auto pt-1 pb-16 px-4 relative group'>
+          {dadosAluno && dadosModalidade ? 
+          <>
+          <div className='w-full h-full rounded-2xl bg-center bg-cover duration-500 bg-slate-400 flex'>
+          {graficosMobile[indiceCorrente]}
+        </div>
+        <div className='hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
+          <BsChevronCompactLeft onClick={slideAnterior} size={30} />
+        </div>
+        <div className='hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
+          <BsChevronCompactRight onClick={proximoSlide} size={30} />
+        </div>
+        <div className='flex top-4 justify-center py-2'>
+            {graficosMobile.map((slide, indiceDoSlide) => (
+              <div key={indiceDoSlide} onClick={() => vaiParaSlide(indiceDoSlide)}className='text-2xl cursor-pointer'>
+                <RxDotFilled color={indiceCorrente === indiceDoSlide ? 'black' : 'gray'}/>
+              </div>
+            ))}
+        </div>
+        </> : null 
+        }
+          
+        </div>
+  
+        </div>
+      ) : (
         <div className='bg-mygray2 w-[calc(100vw-370px)] border'>
            <div className='flex justify-center items-center w-[calc(100%)-0.75rem] bg-mygray m-[0.75rem]'>
             <h1 className='p-3 font-bakbak text-4xl text-myblue'>Estatísticas</h1>

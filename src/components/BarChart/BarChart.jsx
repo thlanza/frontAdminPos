@@ -2,7 +2,7 @@ import * as d3 from "d3";
 import { useEffect, useRef } from "react";
 import { event as currentEvent  } from 'd3-selection';
 
-const Barchart = ({ data }) => {
+const Barchart = ({ data, mobile }) => {
   const ref = useRef();
 
   let valores = data.map(elemento =>elemento.valor);
@@ -11,9 +11,9 @@ const Barchart = ({ data }) => {
 
   useEffect(() => {
     // set the dimensions and margins of the graph
-    const margin = { top: 100, right: 0, bottom: 70, left: 150 },
-      width = 700 - margin.left - margin.right,
-      height = 600 - margin.top - margin.bottom;
+    const margin = { top: 100, right: 0, bottom: 70, left: mobile ? 15 : 150 },
+      width = mobile ? 290 - margin.left - margin.right : 700 - margin.left - margin.right,
+      height = mobile ? 300 - margin.top - margin.bottom : 600 - margin.top - margin.bottom;
 
     // append the svg object to the body of the page
     const svg = d3
@@ -77,7 +77,7 @@ const Barchart = ({ data }) => {
 
   return (
   <div className="flex justify-center">
-  <svg width={700} height={600} id="barchart" ref={ref} />
+  <svg width={mobile ? 290 : 700} height={mobile ? 300 : 600} id="barchart" ref={ref} />
   </div>);
 };
 
