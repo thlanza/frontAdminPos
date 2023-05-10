@@ -21,7 +21,9 @@ const Home = () => {
     return configurarErro(msgErro);
   });
   axios.get(`${baseUrl}/admin/indice`).then((response) => {
-    let indice = `${response.data.indice}%`;
+    let resposta = response.data.indice;
+    resposta = Number(resposta).toFixed(2);
+    let indice = `${resposta}%`;
     configurarIndice(indice);
     configurarCarregando(false);
   }).catch((err) => {
