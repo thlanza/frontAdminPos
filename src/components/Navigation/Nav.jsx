@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import Logo from '../Logo/Logo'
-import { IoHomeSharp, IoCalendarOutline } from 'react-icons/io5';
+import { IoHomeSharp, IoCalendarOutline, IoReceiptOutline } from 'react-icons/io5';
 import { FaUserGraduate } from "react-icons/fa"
 import { AiOutlineOrderedList, AiOutlineLogout } from "react-icons/ai";
 import { ImStatsDots } from "react-icons/im";
@@ -9,6 +9,8 @@ import { MdOutlineAttachMoney } from "react-icons/md"
 import { logoutAction } from '../../redux/slices/admin/adminSlices';
 import useMediaQuery from '../../hooks/useMediaQuery';
 import { Link, useNavigate } from 'react-router-dom';
+import { GoDashboard } from 'react-icons/go'
+
 
 const IconLink = ({ icon, link, url, onClick }) => {
     let styles = link.toLowerCase();
@@ -49,7 +51,8 @@ const Nav = ({ aoClicar }) => {
             <IconLink onClick={aoClicar} icon={<FaUserGraduate color="white" size={25} />} url="/alunos" link="Alunos" />
             <IconLink onClick={aoClicar} icon={<AiOutlineOrderedList color="white" size={25} />} url="/modalidades" link="Modalidades" />
             <IconLink onClick={aoClicar} icon={<ImStatsDots color="white" size={25} />} url="/estatisticas" link="Estatísticas" />
-            <IconLink onClick={aoClicar} icon={<MdOutlineAttachMoney color="white" size={25} />} url="/pagamentos" link="Pagamentos" />
+            <IconLink onClick={aoClicar} icon={<GoDashboard color="white" size={25} />} url="/painelPresencas" link="Painel de Presenças" />
+            <IconLink onClick={aoClicar} icon={<IoReceiptOutline color="white" size={25} />} url="/painelComprovantes" link="Painel de Comprovantes" />
         </div>
         <div 
             className='text-white mt-16 flex cursor-pointer flex-col items-center font-spartan'

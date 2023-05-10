@@ -91,7 +91,11 @@ const PrimeiroLogin = () => {
                     Logar
                 </button>
              )}
-           
+            <p className='mt-7 font-light'>É o seu primeiro acesso? <button 
+                  onClick={() => navigate('/primeiroLogin')} 
+                  className='font-bold cursor-pointer'>
+                      Cadastrar
+                  </button></p>
         </form>
  </>
     ) : 
@@ -136,7 +140,11 @@ const PrimeiroLogin = () => {
                 Logar
             </button>
             )}
-         
+            <button 
+                  onClick={() => navigate('/')} 
+                  className='font-bold cursor-pointer'>
+                      Já tenho cadastro!
+                  </button>
     </form>
     </div>
         <div className='w-1/2 h-screen'>

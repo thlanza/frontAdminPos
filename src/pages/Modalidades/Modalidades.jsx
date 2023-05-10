@@ -39,7 +39,7 @@ const Modalidades = () => {
   return (
      <div className='w-screen bg-mygray2'>
       {isMobile? (
-        <div className='bg-mygray2 w-screen'>
+        <div className='bg-mygray2 w-screen h-screen'>
           <p className='font-bakbak text-myblue pt-16 text-4xl pb-5'>Modalidades</p>
           <Link to="/novaModalidade" state={{ new: true }} className=' bg-mygray border-2 mb-2 border-myblue flex justify-center items-center cursor-pointer'>
                 <VscNewFolder size={50} color={"#315199"}/>
@@ -47,7 +47,7 @@ const Modalidades = () => {
           </Link>
           {erroDownload ? <h1 className='text-red h-[300px] text-5xl flex items-center justify-center'>Erro no Download: {erroDownload}</h1> : null}
           {appErr || serverErr ? 
-          <h1 className='text-red h-[300px] text-5xl flex items-center justify-center'>{appErr} {serverErr}</h1>
+          <h1 className='text-red-600 h-[300px] text-2xl flex items-center justify-center'>Estamos com problemas nos nossos servidores no momento. <br />Tente novamante mais tarde.</h1>
            : modalidades?.length === 0 ?
            <h1 className='sem-modalidades text-black h-[300px] text-5xl flex items-center justify-center'>Sem modalidades no momento!</h1>
            : modalidades?.map((modalidade, index) => {
@@ -95,9 +95,9 @@ const Modalidades = () => {
             <p className='font-bakbak text-myblue mt-16 text-4xl'>Modalidades</p>
         </div>
         <div className='flex flex-col items-center'>
-        <div className={modalidades?.length === 0 || appErr || serverErr ? 'bg-mygray p-2 mt-8 grid grid-cols-5 w-[95%] font-spartan' : 'bg-myblack p-2 mt-8 w-[95%] grid grid-cols-5 font-spartan'}>
+        <div className={modalidades?.length === 0 || appErr || serverErr ? 'bg-mygray p-2 mt-8 w-[95%] font-spartan' : 'bg-myblack p-2 mt-8 w-[95%] grid grid-cols-5 font-spartan'}>
         {appErr || serverErr ? 
-        <h1 className='text-black h-[300px] text-5xl flex items-center justify-center ml-20'>{appErr} {serverErr}</h1> :
+        <h4 className='text-red-600 h-[300px] w-[100%] text-2xl flex items-center justify-center ml-20'>Estamos com problemas nos nossos servidores no momento. <br />Tente novamante mais tarde.</h4> :
         modalidades?.length === 0 ? 
         <h1 className='sem-modalidades text-black h-[300px] text-5xl flex items-center justify-center ml-20'>Sem modalidades no momento!</h1>
         : modalidades?.map((modalidade, index) => {

@@ -13,6 +13,9 @@ import UltimoLoginRotasProtegidas from './pages/RotasProtegidas/UltimoLoginRotas
 import { loadCldr } from '@syncfusion/ej2-base';
 import Alunos from './pages/Alunos/Alunos';
 import Estatisticas from './pages/Estatisticas/Estatisticas';
+import PainelPresencas from './pages/PainelPresencas/PainelPresencas';
+import PainelPresencasLista from './components/PainelPresencasLista/PainelPresencasLista';
+import PainelComprovantes from './pages/PainelComprovantes/PainelComprovantes';
 
 loadCldr(
   require('cldr-data/supplemental/numberingSystems.json'),
@@ -41,6 +44,9 @@ function App() {
             <Route path="/agenda" element={<Agenda />} />
             <Route path="/alunos" element={<Alunos />} />
             <Route path="/estatisticas" element={<Estatisticas />} />
+            <Route path="/painelPresencas" element={<PainelPresencas />} />
+            <Route path="/painelPresencasLista" element={<PainelPresencasLista />} />
+            <Route path="/painelComprovantes" element={<PainelComprovantes />} />
         </Route>
 
       </Routes>

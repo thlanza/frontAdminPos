@@ -93,8 +93,6 @@ const Modal = () => {
                   dias: values?.dias ? values?.dias.map(element => element.label): defaultOptions,
                   id
                 }
-                console.log(values?.dias ? "true" : "false");
-                console.log(data);
                 if (newModal) {
                   dispatch(criarModalidadeAction(data));
                 } else {
@@ -119,8 +117,7 @@ const Modal = () => {
 
   if (modalidadeCriada) {
     dispatch(resetCriada());
-    navigate("/modalidades");
-    
+    navigate("/modalidades");  
   }
         
   return (
@@ -162,13 +159,14 @@ const Modal = () => {
           <div className='pl-5 bg-myblack text-white border'>Dias</div>
               <Select 
     className='p-3 mb-1 col-span-2'
+    placeholder="Selecione..."
     components={animatedComponents}
     onChange={(opcao) => formik.setFieldValue("dias", opcao)}
     options={options}
     defaultValue={pronto ? defaultOptions : []}
     isMulti
     isSearchable
-    />  
+    />
     </>
 
 
@@ -224,6 +222,7 @@ const Modal = () => {
    <p className='flex justify-center text-2xl bg-myblack text-white'>Dias</p>    
    <Select 
    className='p-3 mb-1 select'
+   placeholder="Selecione..."
    components={animatedComponents}
    onChange={(e) => {
      formik.setFieldValue("dias", e)

@@ -77,6 +77,79 @@ export const registrarUsuarioAction = createAsyncThunk('admin/registrar',
         }
 });
 
+export const painelPresencaAction = createAsyncThunk('admin/painelPresenca',
+        async (presenca, { rejectWithValue, getState, dispatch }) => {
+            const { modalidadeId, dia, mes, ano } = presenca;
+            try {
+                //http call
+                const config = {
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                };
+                const url = `${baseUrl}/admin/listaDePresenca?modalidadeId=${modalidadeId}&mes=${mes}&dia=${dia}&ano=${ano}`;
+                const { data } = await axios.get(
+                    url,
+                    config
+                )
+                return data;
+            } catch (err) {
+                if(!err?.response) {
+                    throw err;
+                };
+                return rejectWithValue(err?.response?.data);
+            }
+});
+
+export const validarComprovanteAction = createAsyncThunk('admin/validarComprovante',
+        async (comprovante, { rejectWithValue, getState, dispatch }) => {
+            try {
+                //http call
+                const config = {
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                };
+                const url = `${baseUrl}/admin/validarComprovantes`;
+                const { data } = await axios.post(
+                    url,
+                    comprovante,
+                    config
+                )
+                return data;
+            } catch (err) {
+                if(!err?.response) {
+                    throw err;
+                };
+                return rejectWithValue(err?.response?.data);
+            }
+});
+
+export const getComprovantesAction = createAsyncThunk('admin/getComprovantes',
+        async (_, { rejectWithValue, getState, dispatch }) => {
+            try {
+                //http call
+                const config = {
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                };
+                const url = `${baseUrl}/admin/painelDeComprovantes`;
+                const { data } = await axios.get(
+                    url,
+                    config
+                )
+                return data;
+            } catch (err) {
+                if(!err?.response) {
+                    throw err;
+                };
+                return rejectWithValue(err?.response?.data);
+            }
+});
+
+
+
 export const logoutAction = createAsyncThunk('admin/logout',
     async (_, { rejectWithValue, getState, dispatch }) => {
         try {
@@ -166,6 +239,57 @@ const adminSlices = createSlice({
             state.serverErr = undefined;
         });
         builder.addCase(logoutAction.rejected, (state, action) => {
+            state.appErr = action?.payload?.message;
+            state.serverErr = action?.error?.message;
+            state.loading = false;
+        });
+        //lista de presença
+        builder.addCase(painelPresencaAction.pending, (state, action) => {
+            state.loading = false;
+            state.appErr = undefined;
+            state.serverErr = undefined; 
+        });
+        builder.addCase(painelPresencaAction.fulfilled, (state, action) => {
+            state.listaDePresenca = action.payload;
+            state.loading = false;
+            state.appErr = undefined;
+            state.serverErr = undefined;
+        });
+        builder.addCase(painelPresencaAction.rejected, (state, action) => {
+            state.appErr = action?.payload?.message;
+            state.serverErr = action?.error?.message;
+            state.loading = false;
+        });
+        //painel de comprovantes
+        builder.addCase(getComprovantesAction.pending, (state, action) => {
+            state.loading = false;
+            state.appErr = undefined;
+            state.serverErr = undefined; 
+        });
+        builder.addCase(getComprovantesAction.fulfilled, (state, action) => {
+            state.painelDeComprovantes = action.payload;
+            state.loading = false;
+            state.appErr = undefined;
+            state.serverErr = undefined;
+        });
+        builder.addCase(getComprovantesAction.rejected, (state, action) => {
+            state.appErr = action?.payload?.message;
+            state.serverErr = action?.error?.message;
+            state.loading = false;
+        });
+        //validar Comprovante
+        builder.addCase(validarComprovanteAction.pending, (state, action) => {
+            state.loading = false;
+            state.appErr = undefined;
+            state.serverErr = undefined; 
+        });
+        builder.addCase(validarComprovanteAction.fulfilled, (state, action) => {
+            state.comprovanteValido = action.payload;
+            state.loading = false;
+            state.appErr = undefined;
+            state.serverErr = undefined;
+        });
+        builder.addCase(validarComprovanteAction.rejected, (state, action) => {
             state.appErr = action?.payload?.message;
             state.serverErr = action?.error?.message;
             state.loading = false;

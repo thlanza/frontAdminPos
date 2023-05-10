@@ -8,6 +8,7 @@ import { RiDeleteBin2Fill } from 'react-icons/ri';
 import { ImDownload2 } from 'react-icons/im';
 import { downloadPdf } from '../../utils/download';
 import { baseUrl } from '../../utils/baseURL';
+import ClipLoader from "react-spinners/ClipLoader";
 
 const Alunos = () => {
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ const Alunos = () => {
     }
   };
 
-  const { alunos, alunoDeletado } = useSelector(state => state?.alunos);
+  const { alunos, alunoDeletado, appErr, serverErr, loading } = useSelector(state => state?.alunos);
 
   useEffect(() => {
     dispatch(getAlunosAction());
@@ -51,13 +52,13 @@ const Alunos = () => {
     .slice(offset, offset + POR_PAGINA)
     .map(elemento => 
     <div className='text-myblue border flex flex-col justify-center bg-mygray font-spartan mb-10'>
-    <img src={elemento.fotoDePerfil} alt="foto De Perfil" />
-    <Fila rotulo="Primeiro Nome: " conteudo={elemento.primeiroNome}/>
-    <Fila rotulo="Sobrenome: " conteudo={elemento.sobrenome} /> 
-    <Fila rotulo="Modalidade: " conteudo={elemento.modalidade.nomeModalidade}  />
-    <Fila rotulo="Email: " conteudo={elemento.email} />
-    <Fila rotulo="Inadimplente?" conteudo={inadimplente(elemento.inadimplente)} />
-    <Fila rotulo="Meses Inadimplente: " conteudo={elemento.mesesInadimplente} />
+    <img src={elemento?.fotoDePerfil} alt="foto De Perfil" />
+    <Fila rotulo="Primeiro Nome: " conteudo={elemento?.primeiroNome}/>
+    <Fila rotulo="Sobrenome: " conteudo={elemento?.sobrenome} /> 
+    <Fila rotulo="Modalidade: " conteudo={elemento?.modalidade?.nomeModalidade}  />
+    <Fila rotulo="Email: " conteudo={elemento?.email} />
+    <Fila rotulo="Inadimplente?" conteudo={inadimplente(elemento?.inadimplente)} />
+    <Fila rotulo="Meses Inadimplente: " conteudo={elemento?.mesesInadimplente} />
     <div className='flex items-center justify-center bg-white text-myred border-t-2 border'>
       <button 
       onClick={() => registrar(elemento._id)}
@@ -83,7 +84,13 @@ const Alunos = () => {
     <h1 className='p-3 font-bakbak text-4xl text-myblue'>Dashboard de Alunos</h1>
     </div>
     <div className='flex justify-center items-center w-[calc(100%)-0.75rem] bg-mygray m-[0.75rem]'>
-    <h1 className='p-3 numero font-bakbak text-2xl text-myblue'>{tamanho} alunos encontrados.</h1>
+    {loading ?     <ClipLoader
+                      color={"red"}
+                      size={150}
+                      aria-label="Loading Spinner"
+                      data-testid="loader"
+                    /> : appErr || serverErr ?    <h1 className='p-3 numero font-bakbak text-2xl text-red-600'>Estamos com problemas nos servidores. Tente novamente mais tarde.</h1>
+    : <h1 className='p-3 numero font-bakbak text-2xl text-myblue'>{tamanho} alunos encontrados.</h1>}
     {erroDownload && <h1 className='p-3 numero font-bakbak text-2xl text-red-500'>{erroDownload}</h1>}
 
     </div>

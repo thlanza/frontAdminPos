@@ -149,8 +149,8 @@ const Estatisticas = () => {
   
         </div>
       ) : (
-        <div className='bg-mygray2 w-[calc(100vw-370px)] border'>
-           <div className='flex justify-center items-center w-[calc(100%)-0.75rem] bg-mygray m-[0.75rem]'>
+        <div className='bg-mygray2 w-[calc(100vw-335px)] border '>
+           <div className='flex justify-center items-center w-[calc(100%)-0.75rem] bg-mygray m-[0.75rem] '>
             <h1 className='p-3 font-bakbak text-4xl text-myblue'>Estatísticas</h1>
             </div>
         <div className='w-[1000px] h-[820px] mt-0 mb-auto mr-auto ml-auto pt-1 pb-16 px-4 relative group'>
