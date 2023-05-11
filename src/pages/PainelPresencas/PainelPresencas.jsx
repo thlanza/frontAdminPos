@@ -110,7 +110,7 @@ const PainelPresencas = () => {
                         onChange={(date) => configurarDataInicial(date)} 
                         locale='pt'
                     />
-                    <button className='text-black bg-white rounded-full p-3 transition duration-500 hover:bg-black hover:text-white border border-black' type="submit">Notificar</button>
+                    <button className='text-black bg-white rounded-full p-3 transition duration-500 hover:bg-black hover:text-white border border-black' type="submit">Consultar</button>
             </form>
             </div>
             </div>
@@ -160,7 +160,7 @@ const PainelPresencas = () => {
                         onChange={(date) => configurarDataInicial(date)} 
                         locale='pt'
                     />
-                    <button className='text-black bg-white rounded-full p-3 transition duration-500 hover:bg-black hover:text-white border border-black' type="submit">Notificar</button>
+                    <button className='text-black bg-white rounded-full p-3 transition duration-500 hover:bg-black hover:text-white border border-black' type="submit">Consultar</button>
             </form>
             </div>
             </div>
