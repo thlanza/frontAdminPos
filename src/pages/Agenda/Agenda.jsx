@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getModalidadesAction } from '../../redux/slices/modalidades/modalidadeSlices';
 import { useEffect } from 'react';
 import { pegarDiasEntreDatas } from '../../utils/pegarDiasEntreDatas';
+import { ClipLoader } from 'react-spinners';
  
 const Agenda = () => {
   
@@ -65,21 +66,25 @@ const Agenda = () => {
 
   return (
     <div>
-        <ScheduleComponent 
-        selectedDate={new Date()}
-        currentView='Month'
-        locale='pt'
-        eventSettings={{ dataSource: dataSourceArray }}
-        >
-            <ViewsDirective>
-                <ViewDirective option="Today" displayName="HojeSim"></ViewDirective>
-                <ViewDirective option="Day" startHour="06:00" endHour="23:00" displayName="Dia"></ViewDirective>
-                <ViewDirective option="Week" showWeekend={true} displayName="Semana"></ViewDirective>
-                <ViewDirective option="Month" showWeekend={false} displayName="Mês"></ViewDirective>
-                <ViewDirective option="WorkWeek" displayName='Semana de Trabalho'></ViewDirective>
-            </ViewsDirective>
-            <Inject services={[Day, Week, WorkWeek, Month, AgendaSync]} />
-        </ScheduleComponent>
+        {loading ? <>
+        <ClipLoader />
+        </> : (
+              <ScheduleComponent 
+              selectedDate={new Date()}
+              currentView='Month'
+              locale='pt'
+              eventSettings={{ dataSource: dataSourceArray }}
+              >
+                  <ViewsDirective>
+                      <ViewDirective option="Today" displayName="HojeSim"></ViewDirective>
+                      <ViewDirective option="Day" startHour="06:00" endHour="23:00" displayName="Dia"></ViewDirective>
+                      <ViewDirective option="Week" showWeekend={true} displayName="Semana"></ViewDirective>
+                      <ViewDirective option="Month" showWeekend={false} displayName="Mês"></ViewDirective>
+                      <ViewDirective option="WorkWeek" displayName='Semana de Trabalho'></ViewDirective>
+                  </ViewsDirective>
+                  <Inject services={[Day, Week, WorkWeek, Month, AgendaSync]} />
+              </ScheduleComponent>
+        )}
     </div>
   )
 }
