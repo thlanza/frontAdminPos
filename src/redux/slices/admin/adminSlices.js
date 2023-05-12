@@ -52,9 +52,25 @@ async (adminData, { rejectWithValue, getState, dispatch }) => {
 })
 
 export const registrarUsuarioAction = createAsyncThunk('admin/registrar',
-    async (usuario, { rejectWithValue, getState, dispatch }) => {
+    async ({ primeiroNome, sobrenome, senha, email, image }, { rejectWithValue, getState, dispatch }) => {
         try {
             //http call
+
+
+            // initialValues: {
+            //     primeiroNome: '',
+            //     sobrenome: '',
+            //     senha: '',
+            //     email: '',
+            //     image: ''
+            // },
+            let formData= new FormData();
+            formData.append("image", image);
+            formData.append("primeiroNome", primeiroNome);
+            formData.append("sobrenome", sobrenome);
+            formData.append("senha", senha);
+            formData.append("email", email);
+
             const config = {
                 headers: {
                     "Content-Type": "multipart/form-data",
@@ -63,7 +79,7 @@ export const registrarUsuarioAction = createAsyncThunk('admin/registrar',
             const url = `${baseUrl}/admin/registrar`
             const { data } = await axios.post(
                 url,
-                usuario,
+                formData,
                 config
             );
             //salvar usuário no localStorage
