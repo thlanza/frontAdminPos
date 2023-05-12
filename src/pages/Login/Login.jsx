@@ -96,12 +96,12 @@ const Login = () => {
                     />
                 <ToastContainer />
                 {renderButton(loading)}
-                <p className='mt-7 font-light'>É o seu primeiro acesso? <button 
+               </form>
+               <p className='mt-7 font-light'>É o seu primeiro acesso? <button 
                   onClick={() => navigate('/primeiroLogin')} 
                   className='font-bold cursor-pointer'>
                       Cadastrar
                   </button></p>
-               </form>
         </>
         ) : 
         (
@@ -135,16 +135,14 @@ const Login = () => {
                   placeholder='Coloque aqui seu email'
               />
               {renderButton(loading)}
-  
-              <p className='mt-16 font-light'>É o seu primeiro acesso? 
+          </form>     
+          <p className='mt-16 font-light'>É o seu primeiro acesso? 
                   <button 
                   onClick={() => navigate('/primeiroLogin')} 
                   className='font-bold cursor-pointer'>
                       Cadastrar
                   </button>
               </p>
-          </form>
-          
           </div>
           <div className='w-1/2 h-screen'>
               <img className="h-screen w-[100%] object-cover object-top" src="./gym.jpg" alt="" />
