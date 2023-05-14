@@ -23,22 +23,29 @@ const options = [
     { value: 'Domingo', label: 'Domingo' },
 ]
 
-const formSchema = Yup.object().shape({
-    nomeModalidade: Yup.string().optional().when(['horario', 'dias'], {
-      is: (a, b) => a !== undefined || b !== undefined,
-      then: Yup.string().required("Um dos campos deve ser preenchido")
-    }),
-    horario: Yup.string().optional().when(['nomeModalidade', 'dias'], {
-      is: (a, b) => a !== undefined || b !== undefined,
-      then: Yup.string().required("Um dos campos deve ser preenchido")
-    }),
-    dias: Yup.array().optional().when(['nomeModalidade', 'horario'], {
-      is: (a, b) => a !== undefined || b !== undefined,
-      then: Yup.array().required("Um dos campos deve ser preenchido")
-    })
-  }, 
-    [["nomeModalidade", "horario"], ["horario", "dias"], ["nomeModalidade", "dias"]]
-  );
+const formSchema = Yup.object({
+  nomeModalidade: Yup.string().required("Nome da modalidade é requerido"),
+  horario: Yup.string().required("Horário é requerido."),
+  dias: Yup.array().min(1, "Pelo menos um dia deve ser preenchido.")
+});
+
+
+// const formSchema = Yup.object().shape({
+//     nomeModalidade: Yup.string().optional().when(['horario', 'dias'], {
+//       is: (a, b) => a !== undefined || b !== undefined,
+//       then: Yup.string().required("Um dos campos deve ser preenchido")
+//     }),
+//     horario: Yup.string().optional().when(['nomeModalidade', 'dias'], {
+//       is: (a, b) => a !== undefined || b !== undefined,
+//       then: Yup.string().required("Um dos campos deve ser preenchido")
+//     }),
+//     dias: Yup.array().optional().when(['nomeModalidade', 'horario'], {
+//       is: (a, b) => a !== undefined || b !== undefined,
+//       then: Yup.array().required("Um dos campos deve ser preenchido")
+//     })
+//   }, 
+//     [["nomeModalidade", "horario"], ["horario", "dias"], ["nomeModalidade", "dias"]]
+//   );
 
 
 const Modal = () => {
@@ -87,6 +94,7 @@ const Modal = () => {
             },
             onSubmit: values => {
                 // configurarDias(values?.dias?.map(element => element.label));
+              console.log(values?.dias);
                 const data = {
                   nomeModalidade: values?.nomeModalidade,
                   horario: values?.horario,
@@ -138,6 +146,7 @@ const Modal = () => {
             onBlur={formik.handleBlur("nomeModalidade")}
             placeholder="nome da modalidade"
           />
+         <span className='font-spartan text-red-500'>{formik?.touched?.nomeModalidade && formik?.errors?.nomeModalidade}</span>
       </div>
       <div className='grid grid-cols-3'>
           <div className='pl-5 bg-myblack text-white border'>Horários</div>
@@ -153,6 +162,7 @@ const Modal = () => {
               className="horario col-span-2 border border-gray-700 p-3 rounded ml-5 mb-1 w-[85%]"
               placeholder="Horário"
             />
+             <span className='font-spartan text-red-500'>{formik?.touched?.horario && formik?.errors?.horario}</span>
       </div>
       <div className='grid grid-cols-3'>       
           <>
@@ -167,6 +177,7 @@ const Modal = () => {
     isMulti
     isSearchable
     />
+     <span className='font-spartan text-red-500'>{formik?.touched?.dias && formik?.errors?.dias}</span>
     </>
 
 
@@ -199,6 +210,7 @@ const Modal = () => {
     onBlur={formik.handleBlur("nomeModalidade")}
     placeholder="nome da modalidade"
     />
+    <span className='font-spartan text-red-500'>{formik?.touched?.nomeModalidade && formik?.errors?.nomeModalidade}</span>
     </div>
     <div>
     <p className='flex justify-center text-2xl mb-1 bg-myblack text-white'>Horários</p>
@@ -214,6 +226,7 @@ const Modal = () => {
     className="horario border border-gray-700 p-3 rounded ml-5 mb-1 w-[85%]"
     placeholder="Horário"
     />
+    <span className='font-spartan text-red-500'>{formik?.touched?.horario && formik?.errors?.horario}</span>
     </div>
     <div>
 
@@ -232,6 +245,7 @@ const Modal = () => {
    isMulti
    isSearchable
    />  
+  <span className='font-spartan text-red-500'>{formik?.errors?.dias}</span>
    </>) : null}
               
     </div>
