@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'r
 import Nav from './components/Navigation/Nav';
 import Modal from './components/Portal/Modal';
 import Agenda from './pages/Agenda/Agenda';
+import Pagamentos from './pages/Pagamentos/Pagamentos';
+import Estatisticas from './pages/Estatisticas/Estatisticas';
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
 import Modalidades from './pages/Modalidades/Modalidades';
@@ -39,6 +41,8 @@ function App() {
             <Route path="/novaModalidade" element={<Modal />} />
             <Route path="/agenda" element={<Agenda />} />
             <Route path="/alunos" element={<Alunos />} />
+            <Route path="/pagamentos" element={<Pagamentos />} />
+            <Route path="/estatisticas" element={<Estatisticas />} />
         </Route>
 
       </Routes>
