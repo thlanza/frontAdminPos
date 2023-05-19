@@ -77,7 +77,7 @@ const PieChart2 = ({ data, outerRadius, innerRadius, mobile }) => {
         .style('fill', 'white')
         .attr('transform', (d) => {
             const [x, y] = arcGenerator.centroid(d);
-            let string = mobile ? "translate(" + x*2.3 + "," + y*2.3 + ")" : "translate(" + x*2.2 + "," + y*2.2 + ")";
+            let string = mobile ? "translate(" + x*2.8 + "," + y*2.8 + ")" : "translate(" + x*2.2 + "," + y*2.2 + ")";
             return string;
         })
 
@@ -91,7 +91,7 @@ const PieChart2 = ({ data, outerRadius, innerRadius, mobile }) => {
         .attr('transform', (d) => {
             const [x, y] = arcGenerator.centroid(d);
      
-            return "translate(" + x*1.1 + "," + y*1.1 + ")" ;
+            return "translate(" + x*1.0 + "," + y*1.0 + ")" ;
         })
       }
       

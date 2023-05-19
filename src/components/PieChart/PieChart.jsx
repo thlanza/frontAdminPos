@@ -5,10 +5,11 @@ import * as d3 from 'd3';
 const PieChart = ({ data, outerRadius, innerRadius, mobile }) => {
   const margin = {
     top: mobile ? 170 : 250,
-    right: mobile ? 5 : 50,
+    right: mobile ? 0 : 50,
     bottom: mobile? 5 : 50,
     left: mobile? 150 : 370
   };
+
 
   const width = 2 * outerRadius + margin.left + margin.right;
   const height = 2 * outerRadius + margin.top + margin.bottom;
@@ -71,13 +72,14 @@ const PieChart = ({ data, outerRadius, innerRadius, mobile }) => {
    
     arc
         .append('text')
+        .style("font-size", mobile ? "15px" : "20px")
         .attr('text-anchor', 'middle')
         .attr('alignment-baseline', 'middle')
         .text((d) => mobile ? d.data.chave : `${d.data.chave}: ${percentageFormat(d.data.percentage)}`)
         .style('fill', 'white')
         .attr('transform', (d) => {
             const [x, y] = arcGenerator.centroid(d);
-            let string = mobile ? "translate(" + x*2.7 + "," + y*2.7 + ")" : "translate(" + x*2.2 + "," + y*2.2 + ")";
+            let string = mobile ? "translate(" + x*2.8 + "," + y*2.8 + ")" : "translate(" + x*2.2 + "," + y*2.2 + ")";
             return string;
         })
 
@@ -91,7 +93,7 @@ const PieChart = ({ data, outerRadius, innerRadius, mobile }) => {
         .attr('transform', (d) => {
             const [x, y] = arcGenerator.centroid(d);
      
-            return "translate(" + x*1.4 + "," + y*1.4 + ")" ;
+            return "translate(" + x*1.1 + "," + y*1.1 + ")" ;
         })
       }
       

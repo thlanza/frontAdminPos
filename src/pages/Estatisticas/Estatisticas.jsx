@@ -11,6 +11,7 @@ import { RxDotFilled } from 'react-icons/rx';
 import Barchart2 from '../../components/BarChart/BarChart2';
 import PieChart2 from '../../components/PieChart/PieChart2';
 import BarChart3 from '../../components/BarChart/BarChart3';
+import LoadingComponent from '../../utils/LoadingComponent';
 
 
 
@@ -19,28 +20,47 @@ const Estatisticas = () => {
   const [dadosModalidade, configurarDadosModalidade] = useState(null);
   const [dadosInadimplencia, configurarDadosInadimplencia] = useState(null);
   const [dadosMesesInadimplente, configurarDadosMesesInadimplente] = useState(null);
+  const [grafico1pronto, configurarGrafico1pronto] = useState(false);
+  const [grafico2pronto, configurarGrafico2pronto] = useState(false);
+  const [grafico3pronto, configurarGrafico3pronto] = useState(false);
+  const [grafico4pronto, configurarGrafico4pronto] = useState(false);
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   useEffect(() => {
 
     axios.get(
       `${baseUrl}/estatisticas/dadosParaGraficoAlunosInscricao`
-    ).then(resposta => configurarDadosAluno(resposta.data))
+    ).then(resposta => {
+      configurarGrafico1pronto(true);
+      configurarDadosAluno(resposta.data);
+      return;
+    })
     .catch(err => console.error(err));
     
     axios.get(
       `${baseUrl}/estatisticas/dadosParaGraficoModalidades`
-    ).then(resposta => configurarDadosModalidade(resposta.data))
+    ).then(resposta => {
+      configurarGrafico2pronto(true);
+      configurarDadosModalidade(resposta.data);
+      return;
+      })
     .catch(err => console.error(err));
 
     axios.get(
       `${baseUrl}/estatisticas/dadosParaGraficoInadimplencia`
-    ).then(resposta => configurarDadosInadimplencia(resposta.data))
+    ).then(resposta => {
+      configurarGrafico3pronto(true);
+      configurarDadosInadimplencia(resposta.data);
+      return;
+    })
     .catch(err => console.error(err));
 
     axios.get(
       `${baseUrl}/estatisticas/dadosParaGraficoMesesInadimplencia`
-    ).then(resposta => configurarDadosMesesInadimplente(resposta.data))
+    ).then(resposta => {
+      configurarGrafico4pronto(true);
+      configurarDadosMesesInadimplente(resposta.data)
+    })
     .catch(err => console.error(err));
   }, []);
 
@@ -49,41 +69,49 @@ const Estatisticas = () => {
   <h1 className='mt-5 ml-5 text-white font-spartan'>Este gráfico mostra, mês a mês, o número de inscrições na academia.</h1>
   <BarChart data={dadosAluno} className='self-end'/>
   </div>;
+
   const barChartMobile = 
   <div>
-  <h1 className='w-[90vw] mt-5 ml-5 text-white font-spartan'>Este gráfico mostra, mês a mês, o número de inscrições na academia.</h1>
+  <h1 className='w-[90vw] mt-5 ml-1 text-white font-spartan'>Este gráfico mostra, mês a mês, o número de inscrições na academia.</h1>
   <BarChart data={dadosAluno} mobile={true} className='self-end'/>
   </div>;
+
   const pieChartMobile = 
     <div>
-      <h1 className='w-[90vw] mt-5 ml-5 text-white font-spartan'>Este gráfico mostra a distribuição das modalidades, pelo total de alunos inscritos.</h1>
-      <PieChart data={dadosModalidade} outerRadius={110} innerRadius={0} mobile={true} className='self-end'/>
+      <h1 className='w-[90vw] mt-5 ml-1 text-white font-spartan'>Este gráfico mostra a distribuição das modalidades, pelo total de alunos inscritos.</h1>
+      <PieChart data={dadosModalidade} outerRadius={80} innerRadius={0} mobile={true} className='self-end'/>
     </div>;
+
   const pieChart =  
   <div>
   <h1 className='mt-5 ml-5 text-white font-spartan'>Este gráfico mostra a distribuição das modalidades, pelo total de alunos inscritos.</h1>
-  <PieChart data={dadosModalidade} outerRadius={220} innerRadius={0} className='self-end'/>
+  <PieChart data={dadosModalidade} outerRadius={160} innerRadius={0} className='self-end'/>
   </div>;
+
   const pieChartInadimplencia = 
   <div>
   <h1 className='mt-5 ml-5 text-white font-spartan'>Este gráfico mostra a distribuição dos alunos entre inadimplentes e em dia.</h1>
   <PieChart data={dadosInadimplencia} outerRadius={220} innerRadius={0} className='self-end'/>
   </div>;
+
   const pieChartInadimpleciaMobile = 
   <div>
-  <h1 className='w-[90vw] mt-5 ml-5 text-white font-spartan'>Este gráfico mostra a distribuição das modalidades, pelo total de alunos inscritos.</h1>
-  <PieChart2 data={dadosInadimplencia} outerRadius={110} innerRadius={0} mobile={true} className='self-end'/>
+  <h1 className='w-[90vw] mt-5 ml-1 text-white font-spartan'>Este gráfico mostra a distribuição dos alunos entre inadimplentes e em dia.</h1>
+  <PieChart2 data={dadosInadimplencia} outerRadius={80} innerRadius={0} mobile={true} className='self-end'/>
 </div>;
+
   const pieChartMesesInadimplente = 
   <div>
   <h1 className='mt-5 ml-5 text-white font-spartan'>Este gráfico mostra, entre os alunos, a distribuição deles quanto aos meses em que cada um está inadimplente.</h1>
   <Barchart2 data={dadosMesesInadimplente} className='self-end'/>
   </div>;
+
   const pieChartMesesInadimplenteMobile = 
   <div>
-  <h1 className='mt-5 ml-5 text-white font-spartan'>Este gráfico mostra, entre os alunos, a distribuição deles quanto aos meses em que cada um está inadimplente.</h1>
+  <h1 className='mt-5 ml-1 text-white font-spartan'>Este gráfico mostra, entre os alunos, a <br />distribuição deles quanto aos meses em que <br /> cada um está inadimplente.</h1>
   <BarChart3 data={dadosMesesInadimplente} mobile={true} className='self-end'/>
   </div>;
+
   const graficos = [barChart, pieChart, pieChartInadimplencia, pieChartMesesInadimplente];
   const graficosMobile = [barChartMobile, pieChartMobile, pieChartInadimpleciaMobile, pieChartMesesInadimplenteMobile]
     
@@ -124,7 +152,7 @@ const Estatisticas = () => {
             <h1 className='p-3 font-bakbak text-4xl text-myblue'>Estatísticas</h1>
             </div>
         <div className='w-[380px] h-[600px] mt-0 mb-auto mr-auto ml-auto pt-1 pb-16 px-4 relative group'>
-          {dadosAluno && dadosModalidade && dadosInadimplencia ? 
+          {grafico1pronto && grafico2pronto && grafico3pronto && grafico4pronto ?
           <>
           <div className='w-full h-full rounded-2xl bg-center bg-cover duration-500 bg-slate-400 flex'>
           {graficosMobile[indiceCorrente]}
@@ -132,7 +160,7 @@ const Estatisticas = () => {
         <div className='absolute top-[69%] -translate-x-0 translate-y-[50%] left-1 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
           <BsChevronCompactLeft onClick={() => slideAnterior(true)} size={30} />
         </div>
-        <div className='absolute top-[69%] -translate-x-0 translate-y-[50%] right-1 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
+        <div className='absolute top-[69%] -translate-x-0 translate-y-[50%] right-[66px] text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
           <BsChevronCompactRight onClick={() => proximoSlide(true)} size={30} />
         </div>
         <div className='flex top-4 justify-center py-2'>
@@ -142,7 +170,7 @@ const Estatisticas = () => {
               </div>
             ))}
         </div>
-        </> : null 
+        </> : <LoadingComponent />
         }
           
         </div>
@@ -154,7 +182,7 @@ const Estatisticas = () => {
             <h1 className='p-3 font-bakbak text-4xl text-myblue'>Estatísticas</h1>
             </div>
         <div className='w-[1000px] h-[820px] mt-0 mb-auto mr-auto ml-auto pt-1 pb-16 px-4 relative group'>
-          {dadosAluno && dadosModalidade && dadosInadimplencia && dadosMesesInadimplente? 
+          {grafico1pronto && grafico2pronto && grafico3pronto && grafico3pronto ? 
           <>
           <div className='w-full h-full rounded-2xl bg-center bg-cover duration-500 bg-slate-400 flex'>
           {graficos[indiceCorrente]}
@@ -172,7 +200,7 @@ const Estatisticas = () => {
               </div>
             ))}
         </div>
-        </> : null 
+        </> : <LoadingComponent />
         }
           
         </div>

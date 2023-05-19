@@ -19,11 +19,11 @@ const PainelComprovantes = () => {
   const offset = paginaAtual * POR_PAGINA;
 
 
- const { painelDeComprovantes, appErr, serverErr, loading } = useSelector(state => state?.admin);
+ const { painelDeComprovantes, appErr, serverErr, loading, comprovanteValido } = useSelector(state => state?.admin);
 
   useEffect(() => {
     dispatch(getComprovantesAction());
-  }, []);
+  }, [comprovanteValido]);
 
   useEffect(() => {
     configurarListaComprovantes(painelDeComprovantes);
@@ -38,6 +38,7 @@ const PainelComprovantes = () => {
         idComprovante: id
       };
       dispatch(validarComprovanteAction(requisicao));
+      alert("Comprovante validado")
       return;
     } else {
       const requisicao = {
@@ -45,6 +46,7 @@ const PainelComprovantes = () => {
         idComprovante: id
       };
       dispatch(validarComprovanteAction(requisicao));
+      alert("Comprovante invalidado")
       return;
     }
   };
@@ -64,10 +66,9 @@ const PainelComprovantes = () => {
       <Fila rotulo="Ano do comprante" conteudo={elemento.ano} /> 
       <div className='flex items-center justify-center bg-white border-t-2 border flex-col'>
       <button 
-        onClick={() => {}}
+        onClick={() => validar('valido', elemento._id)}
         className='flex w-[100%] border-b justify-center text-[#258039]'>
           <ImCheckboxChecked 
-            onClick={() => validar('valido', elemento._id)}
             color={"#258039"} 
             className='mr-1'/>
             <p className='valido'>Válido</p>

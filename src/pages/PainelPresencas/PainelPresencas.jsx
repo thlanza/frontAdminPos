@@ -37,7 +37,7 @@ const PainelPresencas = () => {
     let mes = data.getMonth() + 1 < 10 ? `0${data.getMonth() + 1}` : data.getMonth() + 1;
     let ano = data.getFullYear();
     let dia = data.getDate() < 10 ? `0${data.getDate()}` : data.getDate();
-    console.log("mes", mes, "ano", ano, "dia", dia)
+
     let modalidadeId = modalidadeSelecionada;
 
     let requisicao = {
